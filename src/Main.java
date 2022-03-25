@@ -1,27 +1,32 @@
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class Main {
 
-    public static int binarySearch(int[] array, int X) throws Exception {
-        int center, left = 0;
-        int right = array.length-1;
+    public static int binarySearch(int[] array, int X)
+    {
+        int center, left = 0, right = array.length-1;
 
         do {
-            center = (int)Math.round((double) (left+right) / 2);
+            center = (left+right) / 2;
             if (X < array[center])
                 right = center;
             else
                 left = center;
-        } while(array[center] != X
-                        && left < right);
 
-        if (left == right)
-            throw new Exception();
+            if (array[center] == X)
+                return center;
+        } while((right-left) > 1);
 
-        return center;
+        return array[left] == X ? left : right;
     }
 
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
-        int res = binarySearch(new int[] {1,2,3}, 3);
-        int a = 1;
+        int res;
+        System.out.println(res = binarySearch(new int[] {-2,-1,0,3,4,10}, -1));
+        //assert (res == 1);
+        //assertThat(res);
+        assertTrue(res == 1);
     }
 }
